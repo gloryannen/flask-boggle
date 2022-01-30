@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}Boggle{% endblock %}
+{% block content %}
+
+<div class='container-fluid'>
+  <h1 class='text-center text-danger w-100'>Play Boggle</h1>
+  <div class='row justify-content-center bg-dark text-white min-vh-100 pt-3' id='boggle'>
+    <div class='col-xs-6 col-sm-4'>
+      <div class='row container'>
+
+      <!-- Instructions Button -->
+      <div class='col-12 dropdown'>
+        <button class='btn btn-secondary dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+              Instructions
+        </button>
+          <div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>
+            <div class='p-4 text-muted' style='min-width: 200px;'>
+              <p> The goal of the game is to get the highest point total. To gain points, create words from a random assortment of letters. Words can be created from adjacent letters - that is, letters which are horizontal or vertical neighbors of each other as well as diagonals. The letters must connect to each other in the proper sequence to spell the word correctly. This means that the next letter in the word can be above, below, left, or right of the previous letter in the word (excluding any letters previously used to construct the word).
+              </p>
+            </div>
+          </div>
+      </div>
+
+      <!-- Timer -->
+      <div class='col-12'>
+        <p>Timer: <b class='timer text-danger'></b></p>
+      </div>
+
+      <!-- Times Played -->
+      <div class='col-12'>
+        <p>Times Played: <b>{{ nplays }}</b></p>
+      </div>
+
+      <!-- Highest Score -->
+      <div class='col-12'>
+        <p>Highest Score: <b>{{ highscore }}</b></p>
+        <p>Current Score: <b class='score'>0</b></p>
+      </div>
+
+      <div class='col-12'>
+        <p class='msg text-warning'></p>
+      </div>
+
+      </div>
+    </div>
+
+      <!-- Boggle Board -->
+    <div class='col-xs-6 col-sm-4 container'>
+      <div class='board'>
+        <div class='col-md'>
+          {% for row in board %}
+            <div class='justify-content-center row col-xs-2'>
+              {% for cell in row %}
+                <div class='col-xs-2 mx-2 letter'>{{ cell }}</div>
+              {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+      </div>
+
+      <!-- Submit Form -->
+      <div class='col mt-2'>
+        <form class='submit-word'>
+          <div class='justify-content-center input-group mb-3'>
+            <input type='text' class='word' name='word' class='form-control' placeholder='...' aria-describedby='button-addon2' size='10'>
+            <div class='input-group-append'>
+              <button class='btn btn-outline-secondary text-white' type='button' id='button-addon2'>Submit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- List of valid guesses -->
+    <div class='col-xs-6 col-sm-4'>
+      <div class='row container'>
+        <ul class='words list-group list-group-horizontal text-dark flex-wrap'></ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+  {% endblock %}
